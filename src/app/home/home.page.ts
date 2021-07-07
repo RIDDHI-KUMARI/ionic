@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
 
+import { Component } from '@angular/core';
+import {Platform} from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,34 +8,28 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  jsonData:any[];
-  
+  arr:any[]=[];
+  arr1:any[]=[];
 
-  constructor() {
-    this.initializeJSONData();
-}
-FilterJSONData(ev:any){
-  this.initializeJSONData();
-  const val =ev.target.value;
-  if(val && val.trim() != ''){
-    this.jsonData = this.jsonData.filter((item) => {
-      return (item.name.toLowerCase().indexof(val.toString().toLowerCase()) > -1);
-    })
+  constructor(private platform:Platform) {
+    this.platform.ready().then(()=>{
+    for(var i =0;i<100;i++)
+    {
+      var obj = {name:"name"+i,
+    mobilenumber:"mobilenumber"+i};
+    this.arr.push(obj);
+    }
+    this.arr1 = this.arr;
+  })
   }
-}
-initializeJSONData(){
-  this.jsonData = [
+  filterArray(ev:any){
+    this.arr = this.arr1;
+    const val =ev.target.value;
+    if(val && val.trim() != "")
     {
-      "name":"Riddhi",
-      "code":"ri"
-    },
-    {
-      "name":"Rishi",
-      "code":"hr"
-    },
-    {
-      "name":"amy",
-      "code":"my"
-    }];
-}
+      this.arr = this.arr1.filter((item)=>{
+        return (item.name.toLowerCase().indexof(val.toLowerCase()) > -1 || item.mobilenumber.toLowerCase().indexof(val.toLowerCase()) > -1 )
+      })
+    }
+  }
 }

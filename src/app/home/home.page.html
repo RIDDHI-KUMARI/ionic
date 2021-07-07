@@ -4,16 +4,22 @@
       Blank
     </ion-title>
     </ion-toolbar>
-    <ion-toolbar color="dark">
-  <ion-searchbar (ionInput)="FilterJSONData($event)"></ion-searchbar>
-  </ion-toolbar>
+  <ion-toolbar color="success">
+  <ion-searchbar (ionInput)="filterArray($event)"></ion-searchbar>
+</ion-toolbar>
 </ion-header>
 
 <ion-content>
-<div class="ion-padding">
-  <ion-list>
-    <ion-item (click)="selectVal(item.name)" *ngFor="let item of jsonData"> {{item.name}}
-    </ion-item>
-  </ion-list>
-</div>
+  <table id="table">
+    <thead>
+      <th>Name</th>
+      <th>Mobilenumber</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of arr">
+        <td>{{item.name}}</td>
+        <td>{{item.mobilenumber}}</td>
+      </tr>
+    </tbody>
+  </table>
 </ion-content>
